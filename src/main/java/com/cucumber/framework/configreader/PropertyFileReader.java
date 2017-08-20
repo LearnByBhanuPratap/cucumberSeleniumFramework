@@ -8,7 +8,7 @@ import org.apache.log4j.Level;
 import com.cucumber.framework.configuration.browser.BrowserType;
 import com.cucumber.framework.utility.ResourceHelper;
 
-public class PropertyFileReader {
+public class PropertyFileReader implements ConfigReader{
 
 	private Properties prop = null;
 

@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cucumber.framework.configreader.PropertyFileReader;
 import com.cucumber.framework.configuration.browser.BrowserType;
 import com.cucumber.framework.configuration.browser.ChromeBrowser;
 import com.cucumber.framework.configuration.browser.FirefoxBrowser;
@@ -29,6 +30,10 @@ import com.cucumber.framework.utility.ResourceHelper;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.google.common.base.Function;
 
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+
 /**
  * 
  * @author bsingh5
@@ -37,12 +42,7 @@ import com.google.common.base.Function;
 public class TestBase {
 
 	private final Logger log = LoggerHelper.getLogger(TestBase.class);
-	private WebDriver driver;
-
-	public TestBase(WebDriver driver) {
-		this.driver = driver;
-		log.debug("TestBase : " + this.driver.hashCode());
-	}
+	public static WebDriver driver;
 
 	public void waitForElement(WebElement element, int timeOutInSeconds) {
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
@@ -152,10 +152,48 @@ public class TestBase {
 						jsBrowser.getPhantomJsCapability());
 
 			default:
-				throw new Exception(" Driver Not Found : " + ObjectRepo.reader.getBrowser());
+				throw new Exception(" Driver Not Found : " + new PropertyFileReader().getBrowser());
 			}
 		} catch (Exception e) {
 			log.equals(e);
+			throw e;
+		}
+	}
+	
+	public void setUpDriver(BrowserType bType) throws Exception {
+		driver = getBrowserObject(bType);
+		log.debug("InitializeWebDrive : " + driver.hashCode());
+		driver.manage().timeouts().pageLoadTimeout(new PropertyFileReader().getPageLoadTimeOut(), TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(new PropertyFileReader().getImplicitWait(), TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+
+	}
+	
+	@Before({ "~@firefox", "~@chrome", "~@phantomjs", "~@iexplorer" })
+	public void before() throws Exception {
+		setUpDriver(new PropertyFileReader().getBrowser());
+		log.info(new PropertyFileReader().getBrowser());
+	}
+
+	@After({ "~@firefox", "~@chrome", "~@phantomjs", "~@iexplorer" })
+	public void after(Scenario scenario) throws Exception {
+		tearDownDriver(scenario);
+		log.info("");
+	}
+	
+	public void tearDownDriver(Scenario scenario) throws Exception {
+		try {
+			if (driver != null) {
+
+				if (scenario.isFailed())
+					scenario.write(takeScreenShot(scenario.getName()));
+
+				driver.quit();
+				driver = null;
+				log.info("Shutting Down the driver");
+			}
+		} catch (Exception e) {
+			log.error(e);
 			throw e;
 		}
 	}
