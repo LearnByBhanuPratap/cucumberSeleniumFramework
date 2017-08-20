@@ -1,0 +1,16 @@
+Cucumber Introduction:
+Cucumber is a tool based on Behavior Driven Development (BDD) framework which is used to write acceptance tests for web application. It allows automation of functional validation in easily readable and understandable format (like plain English) to Business Analysts, Developers, Testers, etc.
+Cucumber feature files can serve as a good document for all. There are many other tools like JBehave which also support BDD framework. Initially Cucumber was implemented in Ruby and then extended to Java framework. Both the tools support native JUnit.
+Behavior Driven Development is extension of Test Driven Development and it is used to test the system rather than testing the particular piece of code. We will discuss more about the BDD and style of writing BDD tests.
+Cucumber can be used along with Selenium, Watir, and Capybara etc. Cucumber supports many other languages like Perl, PHP, Python, .Net etc. In this tutorial we will concentrate on Cucumber with Java as a language.
+
+#1) Feature Files:
+Feature files are essential part of cucumber which is used to write test automation steps or acceptance tests. This can be used as live document. The steps are the application specification. All the feature files ends with .feature extension.
+Sample feature file:
+Feature: Login Functionality Feature
+In order to ensure Login Functionality works, I want to run the cucumber test to verify it is working
+Scenario: Login Functionality
+Given user navigates to SOFTWARETETINGHELP.COM When user logs in using Username as “USER” and Password “PASSWORD” Then login should be successful
+Scenario: Login Functionality
+Given user navigates to SOFTWARETETINGHELP.COM When user logs in using Username as “USER1” and Password “PASSWORD1” Then error message should be thrown
+
