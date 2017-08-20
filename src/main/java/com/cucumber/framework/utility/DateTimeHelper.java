@@ -22,5 +22,11 @@ public class DateTimeHelper {
 	public static String getCurrentDate() {
 		return getCurrentDateTime().substring(0, 11);
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(getCurrentDateTime());
+		
+		System.out.println(getCurrentDate());
+	}
 
 }

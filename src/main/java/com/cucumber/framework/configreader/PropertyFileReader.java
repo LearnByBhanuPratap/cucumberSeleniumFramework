@@ -5,18 +5,17 @@ import java.util.Properties;
 
 import org.apache.log4j.Level;
 
+import com.cucumber.framework.configuration.browser.BrowserType;
 import com.cucumber.framework.utility.ResourceHelper;
 
-public class PropertyFileReader{
-	
+public class PropertyFileReader {
+
 	private Properties prop = null;
 
 	public PropertyFileReader() {
 		prop = new Properties();
 		try {
-			prop.load(ResourceHelper
-					.getResourcePathInputStream("configfile/"
-							+ "config.properties"));
+			prop.load(ResourceHelper.getResourcePathInputStream("configfile/" + "config.properties"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,10 +45,22 @@ public class PropertyFileReader{
 		return Integer.parseInt(prop.getProperty("ExplicitWait"));
 	}
 
+	public String getDbType() {
+		return prop.getProperty("DataBase.Type");
+	}
+
+	public String getDbConnStr() {
+		return prop.getProperty("DtaBase.ConnectionStr");
+	}
+
+	public BrowserType getBrowser() {
+		return BrowserType.valueOf(prop.getProperty("Browser"));
+	}
+
 	public Level getLoggerLevel() {
-		
+
 		switch (prop.getProperty("Logger.Level")) {
-		
+
 		case "DEBUG":
 			return Level.DEBUG;
 		case "INFO":
