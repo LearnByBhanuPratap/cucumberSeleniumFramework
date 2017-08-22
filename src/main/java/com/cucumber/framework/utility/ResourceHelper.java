@@ -19,19 +19,19 @@ public class ResourceHelper {
 	}
 	
 	public static String getBaseResourcePath() {
-		String path = ResourceHelper.class.getClass().getResource("/").getPath();
+		String path = System.getProperty("user.dir");
 		System.out.println(path);
 		return path;
 	}
 	
-	public static InputStream getResourcePathInputStream(String resource) throws FileNotFoundException{
-		return new FileInputStream(ResourceHelper.getResourcePath(resource));
+	public static InputStream getResourcePathInputStream(String path) throws FileNotFoundException{
+		return new FileInputStream(ResourceHelper.getResourcePath(path));
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		System.out.println(ResourceHelper.getResourcePath("configfile/"+ "config.properties"));	
+		//System.out.println(ResourceHelper.getResourcePath("configfile/"+ "config.properties"));	
 		
-		//getBaseResourcePath() ;
+		getBaseResourcePath() ;
 	}
 	
 }

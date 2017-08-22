@@ -17,13 +17,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cucumber.framework.configreader.ObjectRepo;
 import com.cucumber.framework.configreader.PropertyFileReader;
 import com.cucumber.framework.configuration.browser.BrowserType;
 import com.cucumber.framework.configuration.browser.ChromeBrowser;
 import com.cucumber.framework.configuration.browser.FirefoxBrowser;
 import com.cucumber.framework.configuration.browser.HtmlUnitBrowser;
 import com.cucumber.framework.configuration.browser.IExploreBrowser;
-import com.cucumber.framework.configuration.browser.PhantomJsBrowser;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.utility.DateTimeHelper;
 import com.cucumber.framework.utility.ResourceHelper;
@@ -42,6 +42,7 @@ import cucumber.api.java.Before;
 public class TestBase {
 
 	private final Logger log = LoggerHelper.getLogger(TestBase.class);
+	
 	public static WebDriver driver;
 
 	public void waitForElement(WebElement element, int timeOutInSeconds) {
@@ -145,12 +146,6 @@ public class TestBase {
 			case Iexplorer:
 				IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
 				return iExplore.getIExplorerDriver(iExplore.getIExplorerCapabilities());
-
-			case PhantomJs:
-				PhantomJsBrowser jsBrowser = PhantomJsBrowser.class.newInstance();
-				return jsBrowser.getPhantomJsDriver(jsBrowser.getPhantomJsService(),
-						jsBrowser.getPhantomJsCapability());
-
 			default:
 				throw new Exception(" Driver Not Found : " + new PropertyFileReader().getBrowser());
 			}
@@ -161,41 +156,23 @@ public class TestBase {
 	}
 	
 	public void setUpDriver(BrowserType bType) throws Exception {
+		ObjectRepo.reader = new PropertyFileReader();
 		driver = getBrowserObject(bType);
 		log.debug("InitializeWebDrive : " + driver.hashCode());
-		driver.manage().timeouts().pageLoadTimeout(new PropertyFileReader().getPageLoadTimeOut(), TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(new PropertyFileReader().getImplicitWait(), TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(ObjectRepo.reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(ObjectRepo.reader.getImplicitWait(), TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-
 	}
 	
-	@Before({ "~@firefox", "~@chrome", "~@phantomjs", "~@iexplorer" })
+	@Before()
 	public void before() throws Exception {
-		setUpDriver(new PropertyFileReader().getBrowser());
-		log.info(new PropertyFileReader().getBrowser());
+		setUpDriver(ObjectRepo.reader.getBrowser());
+		log.info(ObjectRepo.reader.getBrowser());
 	}
 
-	@After({ "~@firefox", "~@chrome", "~@phantomjs", "~@iexplorer" })
+	@After()
 	public void after(Scenario scenario) throws Exception {
-		tearDownDriver(scenario);
+		driver.quit();
 		log.info("");
 	}
-	
-	public void tearDownDriver(Scenario scenario) throws Exception {
-		try {
-			if (driver != null) {
-
-				if (scenario.isFailed())
-					scenario.write(takeScreenShot(scenario.getName()));
-
-				driver.quit();
-				driver = null;
-				log.info("Shutting Down the driver");
-			}
-		} catch (Exception e) {
-			log.error(e);
-			throw e;
-		}
-	}
-
 }

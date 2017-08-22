@@ -21,10 +21,14 @@ public class ChromeBrowser {
 	}
 
 	public WebDriver getChromeDriver(Capabilities cap) {
-		System.setProperty("webdriver.chrome.driver", ResourceHelper.getResourcePath("driver/chromedriver"));
-		System.setProperty("webdriver.chrome.logfile", ResourceHelper.getResourcePath("logs/chromelogs/") + "chromelog"
-				+ DateTimeHelper.getCurrentDateTime() + ".log");
-		return new ChromeDriver(cap);
+		if (System.getProperty("os.name").contains("Mac")){
+			System.setProperty("webdriver.chrome.driver", ResourceHelper.getResourcePath("/src/main/resources/drivers/chromedriver"));
+			return new ChromeDriver(cap);
+		}
+		else if(System.getProperty("os.name").contains("Window")){
+			System.setProperty("webdriver.chrome.driver", ResourceHelper.getResourcePath("/src/main/resources/drivers/chromedriver.exe"));
+			return new ChromeDriver(cap);
+		}
+		return null;
 	}
-
 }

@@ -1,29 +1,14 @@
-/**
- * rsr 
- *
- *Aug 6, 2016
- */
-package com.cucumber.framework.configuration.browser;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+package com.cucumber.framework.configuration.browser;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.internal.ElementScrollBehavior;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
 import com.cucumber.framework.utility.DateTimeHelper;
 import com.cucumber.framework.utility.ResourceHelper;
 
-
-/**
- * @author rsr
- *
- * Aug 6, 2016
- */
 public class IExploreBrowser {
 	
 	public Capabilities getIExplorerCapabilities() {
@@ -41,7 +26,6 @@ public class IExploreBrowser {
 	
 	public WebDriver getIExplorerDriver(Capabilities cap) {
 		System.setProperty("webdriver.ie.driver", ResourceHelper.getResourcePath("driver/IEDriverServer.exe"));
-		System.setProperty("webdriver.ie.driver.logfile", ResourceHelper.getResourcePath("logs/iexplorerlogs/") + "ielog" + DateTimeHelper.getCurrentDateTime() + ".log");
 		return new InternetExplorerDriver(cap);
 	}
 

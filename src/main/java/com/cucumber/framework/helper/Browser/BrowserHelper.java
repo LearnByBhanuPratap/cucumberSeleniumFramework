@@ -15,13 +15,12 @@ import com.cucumber.framework.helper.TestBase.TestBase;
  * @author bsingh5
  *
  */
-public class BrowserHelper extends TestBase{
+public class BrowserHelper{
 
 	private WebDriver driver;
 	private Logger Log = LoggerHelper.getLogger(BrowserHelper.class);
 
 	public BrowserHelper(WebDriver driver) {
-		super(driver);
 		this.driver = driver;
 		Log.debug("BrowserHelper : " + this.driver.hashCode());
 	}
@@ -81,7 +80,7 @@ public class BrowserHelper extends TestBase{
 	}
 	
 	public void switchToFrame(By locator) {
-		driver.switchTo().frame(getElement(locator));
+		driver.switchTo().frame(new TestBase().getElement(locator));
 		Log.info(locator);
 	}
 	
