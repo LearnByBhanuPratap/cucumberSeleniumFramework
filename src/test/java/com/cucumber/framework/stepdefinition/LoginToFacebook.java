@@ -3,8 +3,6 @@ package com.cucumber.framework.stepdefinition;
 import org.openqa.selenium.By;
 
 import com.cucumber.framework.helper.TestBase.TestBase;
-
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -19,7 +17,7 @@ public class LoginToFacebook {
 	@When("^user enter Username as \"([^\"]*)\" and Password \"([^\"]*)\"$")
 	public void user_enter_Username_as_and_Password(String arg1, String arg2) throws Throwable {
 		TestBase.driver.findElement(By.xpath(".//*[@id='email']")).sendKeys(arg1);
-		TestBase.driver.findElement(By.xpath(".//*[@id='email']")).sendKeys(arg2);
+		TestBase.driver.findElement(By.xpath(".//*[@id='pass']")).sendKeys(arg2);
 	}
 
 	@When("^user click on login button$")

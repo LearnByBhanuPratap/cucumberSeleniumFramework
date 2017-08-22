@@ -156,6 +156,7 @@ public class TestBase {
 	}
 	
 	public void setUpDriver(BrowserType bType) throws Exception {
+		
 		driver = getBrowserObject(bType);
 		log.debug("InitializeWebDrive : " + driver.hashCode());
 		driver.manage().timeouts().pageLoadTimeout(ObjectRepo.reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
