@@ -156,7 +156,6 @@ public class TestBase {
 	}
 	
 	public void setUpDriver(BrowserType bType) throws Exception {
-		ObjectRepo.reader = new PropertyFileReader();
 		driver = getBrowserObject(bType);
 		log.debug("InitializeWebDrive : " + driver.hashCode());
 		driver.manage().timeouts().pageLoadTimeout(ObjectRepo.reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
@@ -166,6 +165,7 @@ public class TestBase {
 	
 	@Before()
 	public void before() throws Exception {
+		ObjectRepo.reader = new PropertyFileReader();
 		setUpDriver(ObjectRepo.reader.getBrowser());
 		log.info(ObjectRepo.reader.getBrowser());
 	}
