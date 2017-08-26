@@ -35,6 +35,12 @@ public class DropDownHelper {
 		return value;
 	}
 	
+	public void SelectUsingIndex(WebElement element,int index) {
+		Select select = new Select(element);
+		select.selectByIndex(index);
+		Log.info("Locator : " + element + " Value : " + index);
+	}
+	
 	
 	public List<String> getAllDropDownValues(WebElement locator) {
 		Select select = new Select(locator);
