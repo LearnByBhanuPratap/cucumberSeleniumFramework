@@ -30,10 +30,4 @@ public class LoginToFacebook {
 		TestBase.driver.findElement(By.xpath(".//*[@id='loginbutton']")).click();
 	}
 
-	@Then("^login should not be successful$")
-	public void login_should_not_be_successful() throws Throwable {
-		TestBase.driver.findElement(By.xpath(".//*[@id='loginbutton']")).click();
-	}
-
-
 }

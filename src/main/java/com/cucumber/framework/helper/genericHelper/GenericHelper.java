@@ -44,7 +44,7 @@ public class GenericHelper{
 		return value;
 	}
 	
-	protected boolean isDisplayed(WebElement element) {
+	public boolean isDisplayed(WebElement element) {
 		try {
 			element.isDisplayed();
 			log.info("element is displayed.."+element);

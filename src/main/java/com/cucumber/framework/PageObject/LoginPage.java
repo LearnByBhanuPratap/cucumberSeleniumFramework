@@ -8,10 +8,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.cucumber.framework.configreader.ObjectRepo;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
+import com.cucumber.framework.helper.TestBase.TestBase;
 import com.cucumber.framework.helper.Wait.WaitHelper;
+import com.cucumber.framework.helper.genericHelper.GenericHelper;
 
 
-public class LoginPage {
+public class LoginPage{
 	
 	WebDriver driver;
 	private final Logger log = LoggerHelper.getLogger(LoginPage.class);
@@ -28,6 +30,9 @@ public class LoginPage {
 	
 	@FindBy(xpath="//*[@id='SubmitLogin']")
 	WebElement submitLogin;
+	
+	@FindBy(xpath="//*[@id='SubmitLogin']")
+	WebElement successMsgObject;
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -51,9 +56,14 @@ public class LoginPage {
 		this.password.sendKeys(password);
 	}
 	
-	public void clickOnSubmitButton(){
+	public HomePage clickOnSubmitButton(){
 		log.info("clicking on submit button...");
 		submitLogin.click();
+		return new HomePage();
+	}
+	
+	public boolean verifySuccessLoginMsg(){
+		return new GenericHelper().isDisplayed(successMsgObject);
 	}
 
 }
