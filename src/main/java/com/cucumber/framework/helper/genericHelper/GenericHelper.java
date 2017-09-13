@@ -7,7 +7,7 @@ import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.helper.TestBase.TestBase;
 
 
-public class GenericHelper extends TestBase{
+public class GenericHelper{
 	
 	private static final Logger log = LoggerHelper.getLogger(GenericHelper.class);
 	

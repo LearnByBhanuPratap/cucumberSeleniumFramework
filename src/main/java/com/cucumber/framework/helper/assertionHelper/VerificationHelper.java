@@ -9,7 +9,7 @@ import com.cucumber.framework.helper.TestBase.TestBase;
 
 
 
-public class VerificationHelper extends TestBase {
+public class VerificationHelper{
 
 	private static final  Logger log = LoggerHelper.getLogger(VerificationHelper.class);
 
@@ -54,16 +54,4 @@ public class VerificationHelper extends TestBase {
 			return flag;
 		}
 	}
-	
-
-	
-	public boolean IsElementPresent(By locator) {
-		boolean flag = driver.findElements(locator).size() >= 1;
-		log.info(flag);
-		System.out.println();
-		return flag;
-	}
-
-	
-	
 }
