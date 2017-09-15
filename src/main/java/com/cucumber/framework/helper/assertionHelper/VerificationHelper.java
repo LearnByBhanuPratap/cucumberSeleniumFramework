@@ -17,6 +17,7 @@ public class VerificationHelper{
 		boolean isDispalyed = false;
 		try {
 			 isDispalyed= element.isDisplayed();
+			 log.info(element.getText()+" is dispalyed");
 		}
 		catch(Exception ex) {
 			log.error("Element not found " + ex);
@@ -29,6 +30,7 @@ public class VerificationHelper{
 		boolean isDispalyed = false;
 		try {
 			 element.isDisplayed();
+			 log.info(element.getText()+" is dispalyed");
 		}
 		catch(Exception ex) {
 			log.error("Element not found " + ex);
@@ -43,14 +45,17 @@ public class VerificationHelper{
 		try {
 			String actualText=element.getText();
 			if(actualText.equals(expectedText)) {
+				log.info("actualText is :"+actualText+" expected text is: "+expectedText);
 				return flag=true;
 			}
 			else {
+				log.error("actualText is :"+actualText+" expected text is: "+expectedText);
 				return flag;
 			}
 		}
 		catch(Exception ex) {
-			log.info("Element not found " + ex);
+			log.error("actualText is :"+element.getText()+" expected text is: "+expectedText);
+			log.info("text not matching" + ex);
 			return flag;
 		}
 	}

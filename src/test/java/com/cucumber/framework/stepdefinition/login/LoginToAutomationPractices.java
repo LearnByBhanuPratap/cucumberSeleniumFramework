@@ -1,7 +1,11 @@
 package com.cucumber.framework.stepdefinition.login;
 
+import org.apache.log4j.Logger;
+import org.testng.Assert;
+
 import com.cucumber.framework.PageObject.LoginPage;
 import com.cucumber.framework.configreader.ObjectRepo;
+import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.helper.TestBase.TestBase;
 
 import cucumber.api.java.en.Given;
@@ -9,7 +13,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class LoginToAutomationPractices{
-	
+	private final Logger log = LoggerHelper.getLogger(LoginToAutomationPractices.class);
 
 	LoginPage loginpage;
 	
@@ -40,7 +44,12 @@ public class LoginToAutomationPractices{
 
 	@Then("^Login is successful$")
 	public void login_is_successful() throws Throwable {
-	    
+		if(loginpage.verifySuccessLoginMsg()){
+			log.info("login test is pass");
+		}
+		else{
+			Assert.assertTrue(false, this.getClass().getSimpleName()+" is fail");
+		}
 	}
 
 

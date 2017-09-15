@@ -1,0 +1,71 @@
+package com.cucumber.framework.PageObject;
+
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import com.cucumber.framework.configreader.ObjectRepo;
+import com.cucumber.framework.helper.Logger.LoggerHelper;
+import com.cucumber.framework.helper.Wait.WaitHelper;
+import com.cucumber.framework.helper.assertionHelper.VerificationHelper;
+
+public class ProductCategoryPage {
+
+	WebDriver driver;
+	private final Logger log = LoggerHelper.getLogger(ProductCategoryPage.class);
+	WaitHelper waitHelper;
+	
+	public String Black = "Black";
+	public String Orange = "Orange";
+	public String Yellow = "Yellow";
+	
+	@FindBy(xpath="//*[@id='layered_block_left']/p")
+	WebElement catalogTextObj;
+	
+	@FindBy(xpath="//*[@id='layer_cart']/div[1]/div[1]/h2")
+	WebElement productAddedSucessfully;
+	
+	@FindBy(xpath="//*[@id='center_column']/ul/li[4]/div/div[2]/div[2]/a[1]/span")
+	WebElement addToCart;
+	
+	@FindBy(xpath="//*[@id='layer_cart']/div[1]/div[2]/div[4]/a/span")
+	WebElement proceedToCheckOut;
+	
+	
+	public ProductCategoryPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		waitHelper = new WaitHelper(driver);
+		waitHelper.waitForElement(driver, catalogTextObj,ObjectRepo.reader.getExplicitWait());
+	}
+	
+	public void mouseOverOnProduct(int number){
+		String fPart = "//*[@id='center_column']/ul/li[";
+		String sPart = "]/div/div[2]/h5/a";
+		Actions action = new Actions(driver);
+		log.info("doing mouse over on: "+number+"..product");
+		action.moveToElement(driver.findElement(By.xpath(fPart+number+sPart))).build().perform();
+	}
+	
+	public void clickOnAddToCart(){
+		log.info("clickin on add to cart");
+		addToCart.click();
+	}
+	
+	public boolean verifyPoductAddedSuccesfully(){
+		return VerificationHelper.verifyElementPresent(productAddedSucessfully);
+	}
+	
+	public void clickOnProceedTocheckOut(){
+		log.info("clickin on :"+proceedToCheckOut.getText());
+		proceedToCheckOut.click();
+	}
+	
+	public void selectColor(String data){
+		driver.findElement(By.xpath("//a[contains(text(),'"+data+"')]/parent::*/preceding-sibling::input[1]")).click();
+	}
+}
