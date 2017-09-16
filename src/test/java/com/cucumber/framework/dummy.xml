@@ -3,7 +3,7 @@
 <suite name="Suite">
 	<test name="LoginRunner">
 		<classes>
-			<class name="com.cucumber.framework.runner.login.LoginRunner"/>
+			<class name="com.cucumber.framework.runner.registration.RegistrationRunner"/>
 		</classes>
 	</test>
 </suite> 
