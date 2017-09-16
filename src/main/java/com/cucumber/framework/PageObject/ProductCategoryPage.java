@@ -68,4 +68,43 @@ public class ProductCategoryPage {
 	public void selectColor(String data){
 		driver.findElement(By.xpath("//a[contains(text(),'"+data+"')]/parent::*/preceding-sibling::input[1]")).click();
 	}
+	
+	public void selectSmallSize() {
+		log.info("selecting small size..");
+		driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_1']")).click();
+	}
+
+	public void selectMediumSize() {
+		log.info("selecting Medium size..");
+		try {
+			boolean selected = driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_2']']")).isSelected();
+			if (!selected) {
+				driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_2']']")).click();
+				log.info("checkbox is checked..");
+			}
+		} catch (Exception e) {
+			log.info("checkbox was already checked..");
+		}
+	}
+
+	public void selectLSize() {
+		log.info("selecting Large size..");
+		try {
+			boolean selected = driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_3']")).isSelected();
+			if (!selected) {
+				driver.findElement(By.xpath("//*[@id='layered_id_attribute_group_3']")).click();
+				log.info("checkbox is checked..");
+			}
+		} catch (Exception e) {
+			log.info("checkbox was already checked..");
+		}
+	}
+	
+	public void selectFirstProduct() {
+		Actions obj = new Actions(driver);
+		log.info("performning mouse over on first product of page..");
+		obj.moveToElement(driver.findElements(By.xpath(".//*[@id='center_column']/ul/li")).get(0)).build().perform();
+		log.info("clicking on add to basket..");
+		driver.findElement(By.xpath(".//*[@id='center_column']/ul/li[1]/div/div[2]/div[2]/a[1]/span")).click();
+	}
 }
