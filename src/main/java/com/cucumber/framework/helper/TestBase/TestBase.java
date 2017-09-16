@@ -58,7 +58,6 @@ public class TestBase {
 	private Function<WebDriver, Boolean> elementLocated(final WebElement element) {
 		return new Function<WebDriver, Boolean>() {
 
-			@Override
 			public Boolean apply(WebDriver driver) {
 				log.debug("Waiting for Element : " + element);
 				return element.isDisplayed();
@@ -173,7 +172,7 @@ public class TestBase {
 
 	@After()
 	public void after(Scenario scenario) throws Exception {
-		//driver.quit();
+		driver.quit();
 		log.info("");
 	}
 }

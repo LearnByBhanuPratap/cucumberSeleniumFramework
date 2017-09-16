@@ -122,6 +122,7 @@ public class Registration {
 
 	@Then("^verify Registration success message$")
 	public void verify_Registration_success_message() throws Throwable {
+		Thread.sleep(8000);
 	}
 
 
