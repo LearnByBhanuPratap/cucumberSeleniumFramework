@@ -12,4 +12,10 @@
 			<class name="com.cucumber.framework.runner.registration.LoginRunner"/>
 		</classes>
 	</test>
+	
+	<test name="TestTotalNumberOfWomenDressProductRunner">
+		<classes>
+			<class name="com.cucumber.framework.runner.ProductCategory.TestTotalNumberOfWomenDressProductRunner"/>
+		</classes>
+	</test>
 </suite> 

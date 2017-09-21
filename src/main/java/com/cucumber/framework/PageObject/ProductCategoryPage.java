@@ -1,5 +1,7 @@
 package com.cucumber.framework.PageObject;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +36,9 @@ public class ProductCategoryPage {
 	
 	@FindBy(xpath="//*[@id='layer_cart']/div[1]/div[2]/div[4]/a/span")
 	WebElement proceedToCheckOut;
+	
+	@FindBy(xpath="//*[@id='center_column']/ul/li")
+	List<WebElement> totalProducts;
 	
 	
 	public ProductCategoryPage(WebDriver driver) {
@@ -106,5 +111,9 @@ public class ProductCategoryPage {
 		obj.moveToElement(driver.findElements(By.xpath(".//*[@id='center_column']/ul/li")).get(0)).build().perform();
 		log.info("clicking on add to basket..");
 		driver.findElement(By.xpath(".//*[@id='center_column']/ul/li[1]/div/div[2]/div[2]/a[1]/span")).click();
+	}
+	
+	public int getTotalProducts(){
+		return totalProducts.size();
 	}
 }
