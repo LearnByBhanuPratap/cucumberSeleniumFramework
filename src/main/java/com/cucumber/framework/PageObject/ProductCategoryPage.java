@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.cucumber.framework.configreader.ObjectRepo;
+import com.cucumber.framework.helper.Javascript.JavaScriptHelper;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.helper.Wait.WaitHelper;
 import com.cucumber.framework.helper.assertionHelper.VerificationHelper;
@@ -71,7 +72,13 @@ public class ProductCategoryPage {
 	}
 	
 	public void selectColor(String data){
+		new JavaScriptHelper(driver).scrollIntoView(driver.findElement(By.xpath("//a[contains(text(),'"+data+"')]/parent::*/preceding-sibling::input[1]")));
 		driver.findElement(By.xpath("//a[contains(text(),'"+data+"')]/parent::*/preceding-sibling::input[1]")).click();
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void selectSmallSize() {

@@ -34,4 +34,23 @@ public class ProductCategory {
 			Assert.assertTrue(false, "given product count is not matching with runtime product Data");
 		}
 	}
+	
+	@Given("^click on orange color filter$")
+	public void click_on_orange_color_filter() throws Throwable {
+		productCategoryPage.selectColor(productCategoryPage.Orange);
+		log.info("we are selecting :"+productCategoryPage.Orange);
+	}
+
+	@Then("^verify total number of products dispalyed as \"([^\"]*)\"$")
+	public void verify_total_number_of_products_dispalyed_as(String arg1) throws Throwable {
+		int total = productCategoryPage.getTotalProducts();
+		if(total == Integer.parseInt(arg1)){
+			Assert.assertTrue(true, "given product count is matching with runtime product Data based on color filter");	
+		}
+		else{
+			log.info("actual product counts are : "+total);
+			Assert.assertTrue(false, "given product count is not matching with runtime product Data based on color filter");
+		}
+	}
+
 }
