@@ -3,7 +3,7 @@
 <suite name="Suite111">
 	<test name="FacebookLoginFeatureRunner111">
 		<classes>
-			<class name="com.cucumber.framework.runner.productCategory.WomenDressProductRunner"/>
+			<class name="com.cucumber.framework.runner.productCategory.TestTotalNumberOfWomenDressProductRunner"/>
 		</classes>
 	</test>
 </suite> 
