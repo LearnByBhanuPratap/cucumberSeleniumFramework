@@ -30,6 +30,7 @@ public class ProductCategory {
 			Assert.assertTrue(true, "given product count is matching with runtime product Data");	
 		}
 		else{
+			log.info("actual product counts are : "+total);
 			Assert.assertTrue(false, "given product count is not matching with runtime product Data");
 		}
 	}
