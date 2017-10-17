@@ -15,13 +15,13 @@
 	
 	<test name="TestTotalNumberOfWomenDressProductRunner">
 		<classes>
-			<class name="com.cucumber.framework.runner.ProductCategory.TestTotalNumberOfWomenDressProductRunner"/>
+			<class name="com.cucumber.framework.runner.productCategory.TestTotalNumberOfWomenDressProductRunner"/>
 		</classes>
 	</test>
 	
 	<test name="TestProductsCountBasedOnColor">
 		<classes>
-			<class name="com.cucumber.framework.runner.ProductCategory.TestProductsCountBasedOnColorRunner"/>
+			<class name="com.cucumber.framework.runner.productCategory.TestProductsCountBasedOnColorRunner"/>
 		</classes>
 	</test>
 

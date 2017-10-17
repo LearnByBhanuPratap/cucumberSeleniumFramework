@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-	<test name="TestTotalNumberOfWomenDressProductRunner">
+<test name="RegistrationRunner">
 		<classes>
-			<class name="cucumber.framework.runner.ProductCategory.TestTotalNumberOfWomenDressProductRunner"/>
+			<class name="com.cucumber.framework.runner.registration.RegistrationRunner"/>
 		</classes>
 	</test>
+	
+	<test name="LoginRunner">
+		<classes>
+			<class name="com.cucumber.framework.runner.login.LoginRunner"/>
+		</classes>
+	</test>
+	
+	<test name="TestTotalNumberOfWomenDressProductRunner">
+		<classes>
+			<class name="com.cucumber.framework.runner.productCategory.TestTotalNumberOfWomenDressProductRunner"/>
+		</classes>
+	</test>
+	
+	<test name="TestProductsCountBasedOnColor">
+		<classes>
+			<class name="com.cucumber.framework.runner.productCategory.TestProductsCountBasedOnColorRunner"/>
+		</classes>
+	</test>
+
 </suite> 
